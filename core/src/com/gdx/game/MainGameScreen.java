@@ -36,8 +36,8 @@ import com.gdx.game.world.WorldTextures;
 
 public class MainGameScreen implements Screen, InputProcessor {
 
-	private int worldWidth = 5000;
-	private int worldHeight = 5000;
+	private int worldWidth = 20000;
+	private int worldHeight = 20000;
 
 	private GdxGame game;
 	private World world;
@@ -45,8 +45,9 @@ public class MainGameScreen implements Screen, InputProcessor {
 	private ShapeRenderer shapeRender;
 	private OrthographicCamera camera;
 
-	private boolean up, down, left, right;
+	private boolean up, down, left, right, zoomIn, zoomOut;
 	private int cameraSpeed = 5;
+	private float zoomSpeed = 0.01f;
 
 	private PlanetUI planetUI;
 	private ShipUI shipUI;
@@ -68,6 +69,8 @@ public class MainGameScreen implements Screen, InputProcessor {
 			down = false;
 			left = false;
 			right = false;
+			zoomIn = false;
+			zoomOut = false;
 			GameLogger.log("setup controls");
 		} catch (Exception e) {
 			GameLogger.errorLog("failed to setup controls");
@@ -92,7 +95,7 @@ public class MainGameScreen implements Screen, InputProcessor {
 		try {
 			world = new World(worldWidth, worldHeight);
 			//world.createUniverse(100);
-			world.createUniverse2(100);
+			world.createUniverse2(400);
 			world.createEmpire("MainEmpire", true);
 			//world.spawnEmpireOnStartingPlanet(world.getPlayerEmpire());
 			Sprite startingSprite = world.getPlayerEmpire().getStartingPlanet().getSprite();
@@ -178,6 +181,13 @@ public class MainGameScreen implements Screen, InputProcessor {
 		}
 		if (right) {
 			camera.position.x += cameraSpeed;
+		}
+		
+		if(zoomIn) {
+			camera.zoom -= zoomSpeed;
+		}
+		if(zoomOut) {
+			camera.zoom += zoomSpeed;
 		}
 
 		camera.update();
@@ -322,7 +332,15 @@ public class MainGameScreen implements Screen, InputProcessor {
 		case (Input.Keys.D):
 			right = true;
 			break;
+		case (Input.Keys.EQUALS):
+			zoomIn = true;
+			break;
+		case (Input.Keys.MINUS):
+			zoomOut = true;
+			break;
 		}
+		
+			
 		return false;
 	}
 
@@ -340,6 +358,12 @@ public class MainGameScreen implements Screen, InputProcessor {
 			break;
 		case (Input.Keys.D):
 			right = false;
+			break;
+		case (Input.Keys.EQUALS):
+			zoomIn = false;
+			break;
+		case (Input.Keys.MINUS):
+			zoomOut = false;
 			break;
 		}
 		return false;
