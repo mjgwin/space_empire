@@ -56,14 +56,14 @@ public class MainGameScreen implements Screen, InputProcessor {
 
 	public MainGameScreen(GdxGame game) {
 		this.game = game;
-		setupControls();
-		loadTextures();
-		setupWorld();
-		setupRendering();
-		setupUI();
+		//setupControls();
+		//loadTextures();
+		//setupWorld();
+		//setupRendering();
+		//setupUI();
 	}
 
-	private void setupControls() {
+	public void setupControls() {
 		try {
 			up = false;
 			down = false;
@@ -78,12 +78,11 @@ public class MainGameScreen implements Screen, InputProcessor {
 		}
 	}
 
-	private void loadTextures() {
+	public void loadTextures() {
 		try {
 			WorldTextures.init();
 			SurfaceTextures.init();
 			ResourceTextures.init();
-			UITextures.init();
 			GameLogger.log("textures loaded");
 		} catch (Exception e) {
 			GameLogger.errorLog("failed to load textures");
@@ -91,7 +90,7 @@ public class MainGameScreen implements Screen, InputProcessor {
 		}
 	}
 
-	private void setupWorld() {
+	public void setupWorld() {
 		try {
 			world = new World(worldWidth, worldHeight);
 			//world.createUniverse(100);
@@ -108,7 +107,7 @@ public class MainGameScreen implements Screen, InputProcessor {
 		}
 	}
 
-	private void setupRendering() {
+	public void setupRendering() {
 		try {
 			batch = new SpriteBatch();
 			shapeRender = new ShapeRenderer();
@@ -124,7 +123,7 @@ public class MainGameScreen implements Screen, InputProcessor {
 
 	}
 
-	private void setupUI() {
+	public void setupUI() {
 		try {
 			resourceBar = new ResourceBar(this, world.getPlayerEmpire());
 			inGameTimeUI = new InGameTimeUI(this);
@@ -144,6 +143,7 @@ public class MainGameScreen implements Screen, InputProcessor {
 
 	@Override
 	public void render(float delta) {
+		
 		ScreenUtils.clear(0, 0, 0, 1);
 		updateAll();
 

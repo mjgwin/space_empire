@@ -22,6 +22,7 @@ public class MainMenuScreen implements Screen{
 	
 	public MainMenuScreen(GdxGame game) {
 		this.game = game;
+		UITextures.init();
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 		stage = new Stage(new ScreenViewport());
@@ -55,7 +56,7 @@ public class MainMenuScreen implements Screen{
 		newGame.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				game.setScreen(new MainGameScreen(game));
+				game.setScreen(new LoadingScreen(game));
 			}
 		});
 		
