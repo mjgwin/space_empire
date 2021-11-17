@@ -2,6 +2,7 @@ package com.gdx.game.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -21,16 +22,15 @@ public class ShipUI extends Stage{
 	private int screenWidth, screenHeight;
 	private MainGameScreen game;
 	private Ship ship;
-	private ShapeRenderer shapeRender;
 	private float boxWidth = 250;
 	private float boxHeight = 50;
+	private float spacing = 10;
 
 	
 	public ShipUI(Ship s, MainGameScreen game) {
 		super(new ScreenViewport());
 		this.ship = s;
 		this.game = game;
-		shapeRender = new ShapeRenderer();
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 		setupScreen();
@@ -46,9 +46,9 @@ public class ShipUI extends Stage{
 		
 		Label nameLabel = new Label("Ship name: " + ship.getName(), skin);
 		Label empireLabel = new Label("Owned by Empire: " + ship.getOwner().getName(), skin);
-		table.add(nameLabel).top().left().expandX();
+		table.add(nameLabel).top().left().expandX().pad(0, spacing, 0, 0);
 		table.row();
-		table.add(empireLabel).top().left().expand();
+		table.add(empireLabel).top().left().expand().pad(0, spacing, 0, 0);
 		table.pack();
 	}
 	
@@ -58,16 +58,15 @@ public class ShipUI extends Stage{
 	
 	@Override
 	public void draw() {
-		drawBackground();
-		super.draw();
+		this.getBatch().begin();
+		drawBackgroundUI(this.getBatch());
+		this.getBatch().end();
 		
+		super.draw();
 	}
 	
-	private void drawBackground() {
-		shapeRender.begin(ShapeType.Filled);
-		shapeRender.setColor(Color.DARK_GRAY);
-		shapeRender.rect(0, screenHeight - boxHeight, boxWidth, boxHeight);
-		shapeRender.end();
+	private void drawBackgroundUI(Batch batch) {
+		batch.draw(UITextures.EMPTY_BOX, 0, screenHeight - boxHeight, boxWidth, boxHeight);
 	}
 
 }

@@ -14,7 +14,7 @@ public class SurfaceCell {
 		FOOD
 	};
 	
-	public static final int DEFAULT_CELL_SIZE = 20;
+	public static final int DEFAULT_CELL_SIZE = 40;
 	
 	public static int numTypes = 6;
 	
@@ -25,6 +25,13 @@ public class SurfaceCell {
 		this.x = x;
 		this.y = y;
 		this.size = size;
+		this.currType = currType;
+	}
+	
+	public SurfaceCell(int x, int y, CellType currType) {
+		this.x = x;
+		this.y = y;
+		this.size = DEFAULT_CELL_SIZE;
 		this.currType = currType;
 	}
 

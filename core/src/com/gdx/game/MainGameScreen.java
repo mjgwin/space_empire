@@ -93,8 +93,7 @@ public class MainGameScreen implements Screen, InputProcessor {
 	public void setupWorld() {
 		try {
 			world = new World(worldWidth, worldHeight);
-			//world.createUniverse(100);
-			world.createUniverse2(400);
+			world.createUniverse(200);
 			world.createEmpire("MainEmpire", true);
 			//world.spawnEmpireOnStartingPlanet(world.getPlayerEmpire());
 			Sprite startingSprite = world.getPlayerEmpire().getStartingPlanet().getSprite();
@@ -446,5 +445,5 @@ public class MainGameScreen implements Screen, InputProcessor {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 }

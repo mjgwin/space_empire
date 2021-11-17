@@ -10,6 +10,7 @@ public class WorldTextures {
 	public static Texture BLUE_PLANET_TEX;
 	public static Texture PURPLE_PLANET_TEX;
 	public static Texture SUN_TEX;
+	public static Texture BLUE_SUN_TEX;
 	public static Texture SHIP_TEX;
 	public static Texture STARTING_SYMBOL_TEX;
 	
@@ -21,6 +22,7 @@ public class WorldTextures {
 		BLUE_PLANET_TEX = new Texture(Gdx.files.internal(textureDir + "blue_planet.png"));
 		PURPLE_PLANET_TEX = new Texture(Gdx.files.internal(textureDir + "purple_planet.png"));
 		SUN_TEX = new Texture(Gdx.files.internal(textureDir + "sun.png"));
+		BLUE_SUN_TEX = new Texture(Gdx.files.internal(textureDir + "blue_sun.png"));
 		SHIP_TEX = new Texture(Gdx.files.internal(textureDir + "ship.png"));
 		STARTING_SYMBOL_TEX = new Texture(Gdx.files.internal(textureDir + "gold_star.png"));
 	}

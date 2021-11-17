@@ -32,7 +32,7 @@ public class PlanetUI extends Stage {
 
 	public PlanetUI(Planet p, MainGameScreen game) {
 		super(new ScreenViewport());
-		managePlanetUI = new ManagePlanetUI(p, game);
+		managePlanetUI = new ManagePlanetUI(p, game, this);
 		this.game = game;
 		planet = p;
 		managePlanetSelected = false;
@@ -78,6 +78,9 @@ public class PlanetUI extends Stage {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				managePlanetSelected = !managePlanetSelected;
+				if(managePlanetSelected) {
+					Gdx.input.setInputProcessor(managePlanetUI);
+				}
 			}
 		});
 	}
@@ -112,4 +115,7 @@ public class PlanetUI extends Stage {
 		batch.draw(UITextures.EMPTY_BOX, 0, screenHeight - boxHeight, boxWidth, boxHeight);
 	}
 	
+	public void setManagePlanetSelected(boolean selected) {
+		this.managePlanetSelected = selected;
+	} 
 }

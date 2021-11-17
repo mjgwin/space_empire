@@ -14,9 +14,6 @@ import com.gdx.game.utils.DiskLoader;
 public class World {
 	
 	private int width, height;
-	private int starDensity = 30;
-	private int planetTypes = 3;
-	private int planetDistance = 400;
 	private int shipSize = 50;
 
 	private ArrayList<Star> stars;
@@ -43,13 +40,7 @@ public class World {
 		planetNames = DiskLoader.loadLinesFromFile("planet_names.data");
 	}
 	
-	public void createUniverse(int planetCount) {
-		int numStars = planetCount * starDensity;
-		generatePlanets(planetCount);
-		generateStars(numStars);
-	}
-	
-	public void createUniverse2(int numSystems) {
+	public void createUniverse(int numSystems) {
 		UniverseGenerator universeGenerator = new UniverseGenerator(this.width, this.height, numSystems);
 		universeGenerator.generate();
 		
@@ -81,69 +72,6 @@ public class World {
 		
 	}
 	
-	private void generateStars(int num) {
-		
-		for(int i = 0; i < num; i++) {
-			int starX = rand.nextInt(this.width);
-			int starY = rand.nextInt(this.height);
-			int type = 1;
-			stars.add(new Star(starX, starY, type));
-		}
-		
-	}
-	
-	private void generatePlanets(int num) {
-		int planetCount = 0;
-		int attempts = 0;
-		do{
-			int type = rand.nextInt(planetTypes);
-			Texture planetTex = null;
-			switch(type) {
-			case 0:
-				planetTex = WorldTextures.DULL_PLANET_TEX;
-				break;
-			case 1:
-				planetTex = WorldTextures.BLUE_PLANET_TEX;
-				break;
-			case 2:
-				planetTex = WorldTextures.PURPLE_PLANET_TEX;
-			}
-			
-			Sprite planetSprite = new Sprite(planetTex);
-			int planetX = rand.nextInt(this.width);
-			int planetY = rand.nextInt(this.height);
-			if(validPlanetPos(planetX, planetY)) {
-				planetSprite.setBounds(planetX, planetY, Planet.DEFAULT_SIZE, Planet.DEFAULT_SIZE);
-				String name = generatePlanetName();
-				planets.add(new Planet(planetSprite, name, type));
-				planetCount++;
-			}else {
-				attempts++;
-			}
-			
-		}while(planetCount < num && attempts < 10000);
-		
-		System.out.println(attempts);
-	}
-	
-	private boolean validPlanetPos(int planetX, int planetY) {
-		if(planets.size() == 0) return true;
-		
-		Rectangle rect = new Rectangle(planetX - planetDistance / 2, planetY - planetDistance / 2, 
-				Planet.DEFAULT_SIZE + planetDistance / 2, Planet.DEFAULT_SIZE + planetDistance / 2);
-		
-		//Rectangle rect = new Rectangle();
-		//rect.setCenter(planetX, planetY);
-		//rec.setSize(Planet.DEFAULT_SIZE + planetDistance);
-		
-		for(Planet p : planets) {
-			if(p.getSprite().getBoundingRectangle().overlaps(rect)) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
 	private String generatePlanetName() {
 		int numWords = planetNames.size();
 		String word1 = planetNames.get(rand.nextInt(numWords));
@@ -160,10 +88,6 @@ public class World {
 		sb.append(letter);
 		
 		return sb.toString();
-	}
-	
-	private void createUniverseCenter() {
-		
 	}
 	
 	private void createStartingPlanetSymbol() {

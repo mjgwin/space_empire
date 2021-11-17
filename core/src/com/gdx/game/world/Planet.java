@@ -24,8 +24,8 @@ public class Planet {
 	private boolean selected;
 	private Empire owner;
 	
-	private final int MIN_SURFACE_SIZE = 10;
-	private final int MAX_SURFACE_SIZE = 20;
+	private final int MIN_SURFACE_SIZE = 5;
+	private final int MAX_SURFACE_SIZE = 10;
 	private Random rand;
 	
 	private int surfaceWidth, surfaceHeight;
@@ -50,13 +50,14 @@ public class Planet {
 		
 		if(type == TYPE_PLANET) {
 			size = rand.nextInt(MAX_PLANET_SIZE - MIN_PLANET_SIZE) + MIN_PLANET_SIZE;
-			tex = findTexture(pickTexture);
+			tex = findPlanetTexture(pickTexture);
 		}else if(type == TYPE_SUN) {
 			size = DEFAULT_SUN_SIZE;
-			tex = WorldTextures.SUN_TEX;
+			int pickSun = rand.nextInt(2);
+			tex = findSunTexture(pickSun);
 		}else if(type == TYPE_MOON) {
 			size = MIN_PLANET_SIZE;
-			tex = findTexture(pickTexture);
+			tex = findPlanetTexture(pickTexture);
 		}
 		
 		this.sprite = new Sprite(tex);
@@ -66,7 +67,21 @@ public class Planet {
 		
 	}
 	
-	private Texture findTexture(int texID) {
+	private Texture findSunTexture(int texID) {
+		Texture tex = WorldTextures.SUN_TEX;
+		
+		switch(texID) {
+		case 0:
+			break;
+		case 1:
+			tex = WorldTextures.BLUE_SUN_TEX;
+			break;
+		}
+		
+		return tex;
+	}
+	
+	private Texture findPlanetTexture(int texID) {
 		Texture tex = WorldTextures.DULL_PLANET_TEX;
 		
 		switch(texID) {

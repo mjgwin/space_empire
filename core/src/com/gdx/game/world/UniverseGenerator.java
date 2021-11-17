@@ -24,7 +24,6 @@ public class UniverseGenerator {
 	
 	private ArrayList<Vector2> starPositions;
 	private ArrayList<Vector2> planetPositions;
-	private ArrayList<Vector2> moonPositions;
 	private ArrayList<Vector2> systemCenters;
 	private Vector2 galaxyCenter;
 	
@@ -38,7 +37,6 @@ public class UniverseGenerator {
 		this.numSystems = numSystems;
 		starPositions = new ArrayList<Vector2>();
 		planetPositions = new ArrayList<Vector2>();
-		moonPositions = new ArrayList<Vector2>();
 		systemCenters = new ArrayList<Vector2>();
 		galaxyCenter = new Vector2();
 		rand = new Random();

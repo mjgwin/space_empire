@@ -15,6 +15,7 @@ public class LoadingScreen implements Screen{
 	
 	private int currWidth = 0;
 	private int spacing = 10;
+	private int delay = 100;
 	
 	private GdxGame game;
 	private MainGameScreen mainGame;
@@ -46,7 +47,7 @@ public class LoadingScreen implements Screen{
 				
 				Gdx.graphics.requestRendering();
 				try {
-					Thread.sleep(100);
+					Thread.sleep(delay);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -61,7 +62,7 @@ public class LoadingScreen implements Screen{
 						
 						Gdx.graphics.requestRendering();
 						try {
-							Thread.sleep(100);
+							Thread.sleep(delay);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -75,7 +76,7 @@ public class LoadingScreen implements Screen{
 								
 								Gdx.graphics.requestRendering();
 								try {
-									Thread.sleep(100);
+									Thread.sleep(delay);
 								} catch (InterruptedException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -89,7 +90,7 @@ public class LoadingScreen implements Screen{
 										
 										Gdx.graphics.requestRendering();
 										try {
-											Thread.sleep(100);
+											Thread.sleep(delay);
 										} catch (InterruptedException e) {
 											// TODO Auto-generated catch block
 											e.printStackTrace();
@@ -103,12 +104,13 @@ public class LoadingScreen implements Screen{
 												
 												Gdx.graphics.requestRendering();
 												try {
-													Thread.sleep(100);
+													Thread.sleep(delay);
 												} catch (InterruptedException e) {
 													// TODO Auto-generated catch block
 													e.printStackTrace();
 												}
 												game.setScreen(mainGame);
+												
 											}
 										});
 									}
