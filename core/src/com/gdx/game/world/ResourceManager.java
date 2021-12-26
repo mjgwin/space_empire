@@ -4,20 +4,23 @@ import java.util.HashMap;
 
 public class ResourceManager {
 	
+	private Empire owner;
+	
 	private int startingValue = 100;
 	
 	private HashMap<String, Integer> resourceValues;
 	
 	public ResourceManager(Empire empire) {
+		owner = empire;
 		resourceValues = new HashMap<String, Integer>();
 		initValues();
 	}
 	
 	private void initValues() {
-		resourceValues.put("currency", startingValue);
-		resourceValues.put("energy", startingValue);
-		resourceValues.put("metal", startingValue);
-		resourceValues.put("food", startingValue);
+		resourceValues.put("Currency", startingValue);
+		resourceValues.put("Energy", startingValue);
+		resourceValues.put("Metal", startingValue);
+		resourceValues.put("Food", startingValue);
 	}
 	
 	public void changeResourceValue(String resourceName, int changeAmount) {

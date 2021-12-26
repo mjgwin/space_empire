@@ -20,12 +20,14 @@ public class SurfaceCell {
 	
 	private CellType currType;
 	private int x, y, size;
+	private String building;
 	
 	public SurfaceCell(int x, int y, int size, CellType currType) {
 		this.x = x;
 		this.y = y;
 		this.size = size;
 		this.currType = currType;
+		building = "none";
 	}
 	
 	public SurfaceCell(int x, int y, CellType currType) {
@@ -92,6 +94,14 @@ public class SurfaceCell {
 		}
 		
 		return toReturn;
+	}
+	
+	public void setBuilding(String building) {
+		this.building = building;
+	}
+	
+	public String getBuilding() {
+		return building;
 	}
 	
 	@Override

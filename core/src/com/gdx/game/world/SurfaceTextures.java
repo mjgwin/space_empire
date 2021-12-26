@@ -13,6 +13,7 @@ public class SurfaceTextures {
 	public static Texture TEXTURE_METAL;
 	public static Texture TEXTURE_CURRENCY;
 	public static Texture TEXTURE_FOOD;
+	public static Texture TEXTURE_FACTORY;
 	
 	public static void init() {
 		TEXTURE_GRASS = new Texture(Gdx.files.internal(textureDir + "surface_grass.png"));
@@ -21,6 +22,7 @@ public class SurfaceTextures {
 		TEXTURE_METAL = new Texture(Gdx.files.internal(textureDir + "surface_metal.png"));
 		TEXTURE_CURRENCY = new Texture(Gdx.files.internal(textureDir + "surface_currency.png"));
 		TEXTURE_FOOD = new Texture(Gdx.files.internal(textureDir + "surface_food.png"));
+		TEXTURE_FACTORY = new Texture(Gdx.files.internal(textureDir + "factory_cell.png"));
 	}
 	
 	public static void dispose() {
@@ -30,5 +32,6 @@ public class SurfaceTextures {
 		TEXTURE_METAL.dispose();
 		TEXTURE_CURRENCY.dispose();
 		TEXTURE_FOOD.dispose();
+		TEXTURE_FACTORY.dispose();
 	}
 }

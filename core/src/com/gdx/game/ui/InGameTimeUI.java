@@ -81,6 +81,10 @@ public class InGameTimeUI extends Stage{
 		}
 	}
 	
+	public int getMonths() {
+		return months;
+	}
+	
 	
 	
 }

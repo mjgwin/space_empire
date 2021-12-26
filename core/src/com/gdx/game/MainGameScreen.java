@@ -27,6 +27,7 @@ import com.gdx.game.ui.UITextures;
 import com.gdx.game.utils.GameLogger;
 import com.gdx.game.world.Empire;
 import com.gdx.game.world.Planet;
+import com.gdx.game.world.ResourceCollectorService;
 import com.gdx.game.world.ResourceTextures;
 import com.gdx.game.world.Ship;
 import com.gdx.game.world.Star;
@@ -53,6 +54,8 @@ public class MainGameScreen implements Screen, InputProcessor {
 	private ShipUI shipUI;
 	private ResourceBar resourceBar;
 	private InGameTimeUI inGameTimeUI;
+	
+	private ResourceCollectorService resourceCollector;
 
 	public MainGameScreen(GdxGame game) {
 		this.game = game;
@@ -126,6 +129,7 @@ public class MainGameScreen implements Screen, InputProcessor {
 		try {
 			resourceBar = new ResourceBar(this, world.getPlayerEmpire());
 			inGameTimeUI = new InGameTimeUI(this);
+			resourceCollector = new ResourceCollectorService(this);
 			Gdx.input.setInputProcessor(this);
 			GameLogger.log("user interface started");
 		} catch (Exception e) {
@@ -166,6 +170,7 @@ public class MainGameScreen implements Screen, InputProcessor {
 	private void updateAll() {
 		updateCamera();
 		world.update();
+		resourceCollector.update();
 	}
 
 	private void updateCamera() {
@@ -444,6 +449,14 @@ public class MainGameScreen implements Screen, InputProcessor {
 	public boolean scrolled(float amountX, float amountY) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public World getWorld() {
+		return world;
+	}
+	
+	public InGameTimeUI getInGameTimeUI() {
+		return inGameTimeUI;
 	}
 	
 }
