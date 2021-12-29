@@ -51,6 +51,8 @@ public class ResourceBar extends Stage{
 		batch.draw(ResourceTextures.TEXTURE_METAL, startPos, screenHeight - barHeight, imageSize, imageSize);
 		startPos += spacing;
 		batch.draw(ResourceTextures.TEXTURE_FOOD, startPos, screenHeight - barHeight, imageSize, imageSize);
+		startPos += spacing;
+		batch.draw(ResourceTextures.TEXTURE_PERSON, startPos, screenHeight - barHeight, imageSize, imageSize);
 	}
 	
 	

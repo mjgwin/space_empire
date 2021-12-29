@@ -20,14 +20,13 @@ public class SurfaceCell {
 	
 	private CellType currType;
 	private int x, y, size;
-	private String building;
+	private SurfaceBuilding surfaceBuilding;
 	
 	public SurfaceCell(int x, int y, int size, CellType currType) {
 		this.x = x;
 		this.y = y;
 		this.size = size;
 		this.currType = currType;
-		building = "none";
 	}
 	
 	public SurfaceCell(int x, int y, CellType currType) {
@@ -96,19 +95,21 @@ public class SurfaceCell {
 		return toReturn;
 	}
 	
-	public void setBuilding(String building) {
-		this.building = building;
-	}
-	
-	public String getBuilding() {
-		return building;
-	}
-	
 	@Override
 	public String toString() {
 		return "SurfaceCell {type = " + this.currType.name() + ", x = " + this.x +
 				", y = " + this.y + ", size = " + this.size + "}";
 	}
+
+	public SurfaceBuilding getSurfaceBuilding() {
+		return surfaceBuilding;
+	}
+
+	public void setSurfaceBuilding(SurfaceBuilding surfaceBuilding) {
+		this.surfaceBuilding = surfaceBuilding;
+	}
+	
+	
 	
 	
 	

@@ -11,12 +11,14 @@ public class ResourceTextures {
 	public static Texture TEXTURE_METAL;
 	public static Texture TEXTURE_CURRENCY;
 	public static Texture TEXTURE_FOOD;
+	public static Texture TEXTURE_PERSON;
 	
 	public static void init() {
 		TEXTURE_ENERGY = new Texture(Gdx.files.internal(textureDir + "energy.png"));
 		TEXTURE_METAL = new Texture(Gdx.files.internal(textureDir + "metal.png"));
 		TEXTURE_CURRENCY = new Texture(Gdx.files.internal(textureDir + "currency.png"));
 		TEXTURE_FOOD = new Texture(Gdx.files.internal(textureDir + "food.png"));
+		TEXTURE_PERSON = new Texture(Gdx.files.internal(textureDir + "person_icon.png"));
 	}
 	
 	public static void dispose() {
@@ -24,6 +26,7 @@ public class ResourceTextures {
 		TEXTURE_METAL.dispose();
 		TEXTURE_CURRENCY.dispose();
 		TEXTURE_FOOD.dispose();
+		TEXTURE_PERSON.dispose();
 	}
 	
 }

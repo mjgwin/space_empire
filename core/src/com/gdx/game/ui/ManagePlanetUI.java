@@ -26,6 +26,8 @@ import com.gdx.game.MainGameScreen;
 import com.gdx.game.world.Empire;
 import com.gdx.game.world.Planet;
 import com.gdx.game.world.ResourceManager;
+import com.gdx.game.world.SurfaceBuilding;
+import com.gdx.game.world.SurfaceBuilding.BuildingType;
 import com.gdx.game.world.SurfaceCell;
 import com.gdx.game.world.SurfaceCell.CellType;
 import com.gdx.game.world.SurfaceTextures;
@@ -120,8 +122,8 @@ public class ManagePlanetUI extends Stage {
 		housing.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if(selected.getBuilding().equals("none")) {
-					selected.setBuilding("housing");
+				if(selected.getSurfaceBuilding() == null) {
+					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.HOUSING));
 				}
 			}
 		});
@@ -129,8 +131,8 @@ public class ManagePlanetUI extends Stage {
 		alloyMine.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if(selected.getBuilding().equals("none")) {
-					selected.setBuilding("alloyMine");
+				if(selected.getSurfaceBuilding() == null) {
+					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.ALLOYMINE));
 				}
 			}
 		});
@@ -138,8 +140,8 @@ public class ManagePlanetUI extends Stage {
 		currencyMine.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if(selected.getBuilding().equals("none")) {
-					selected.setBuilding("currencyMine");
+				if(selected.getSurfaceBuilding() == null) {
+					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.CURRENCYMINE));
 				}
 			}
 		});
@@ -147,8 +149,8 @@ public class ManagePlanetUI extends Stage {
 		farm.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if(selected.getBuilding().equals("none")) {
-					selected.setBuilding("farm");
+				if(selected.getSurfaceBuilding() == null) {
+					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.FARM));
 				}
 			}
 		});
@@ -156,8 +158,8 @@ public class ManagePlanetUI extends Stage {
 		turbine.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if(selected.getBuilding().equals("none")) {
-					selected.setBuilding("turbine");
+				if(selected.getSurfaceBuilding() == null) {
+					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.TURBINE));
 				}
 			}
 		});
@@ -165,8 +167,8 @@ public class ManagePlanetUI extends Stage {
 		stoneExtractor.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if(selected.getBuilding().equals("none")) {
-					selected.setBuilding("stoneExtractor");
+				if(selected.getSurfaceBuilding() == null) {
+					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.STONEEXTRACTOR));
 				}
 			}
 		});
@@ -261,7 +263,13 @@ public class ManagePlanetUI extends Stage {
 	private void drawCellInformation(Batch batch) {
 		if (selected != null) {
 			String selectDraw = "Selected Cell: " + selected.getCurrType().name();
-			String buildingDraw = "Building On Cell: " + selected.getBuilding();
+			String buildingDraw = "Building On Cell: ";
+			if(selected.getSurfaceBuilding() == null) {
+				buildingDraw += "NONE";
+			}else {
+				buildingDraw += selected.getSurfaceBuilding().getBuildingType().name();
+			}
+			
 			selectedLabel.setText(selectDraw);
 			selectedBuildingLabel.setText(buildingDraw);
 		}
@@ -337,7 +345,7 @@ public class ManagePlanetUI extends Stage {
 				batch.draw(toDraw, startX + offsetX, startY + offsetY, SurfaceCell.DEFAULT_CELL_SIZE,
 						SurfaceCell.DEFAULT_CELL_SIZE);
 				
-				if(!surface[i][j].getBuilding().equals("none")) {
+				if(surface[i][j].getSurfaceBuilding() != null) {
 					batch.draw(SurfaceTextures.TEXTURE_FACTORY, startX + offsetX + factoryBuffer, 
 							startY + offsetY + factoryBuffer,
 							SurfaceCell.DEFAULT_CELL_SIZE / 2, SurfaceCell.DEFAULT_CELL_SIZE / 2);
