@@ -52,6 +52,8 @@ public class ResourceBar extends Stage{
 		startPos += spacing;
 		batch.draw(ResourceTextures.TEXTURE_FOOD, startPos, screenHeight - barHeight, imageSize, imageSize);
 		startPos += spacing;
+		batch.draw(ResourceTextures.TEXTURE_STONE, startPos, screenHeight - barHeight, imageSize, imageSize);
+		startPos += spacing;
 		batch.draw(ResourceTextures.TEXTURE_PERSON, startPos, screenHeight - barHeight, imageSize, imageSize);
 	}
 	
@@ -64,15 +66,41 @@ public class ResourceBar extends Stage{
 	
 	private void drawResourceCount(Batch batch) {
 		font.setColor(Color.FIREBRICK);
-		float startX = barStart;
 		
 		for(String resource : resourceManager.getResourceMap().keySet()) {
+			float startX = barStart + spacing * getResourceLocationInBar(resource);
 			float drawX = startX + (imageSize * 1.5f);
 			float drawY = screenHeight - barHeight + (imageSize / 1.5f);
 			String toDraw = Integer.toString(resourceManager.getResourceValue(resource));
 			font.draw(batch, toDraw, drawX, drawY);
-			startX += spacing;
 		}
+	}
+	
+	private int getResourceLocationInBar(String resourceName) {
+		int toReturn = 0;
+		
+		switch(resourceName) {
+			case "Currency":
+				toReturn = 0;
+			break;
+			case "Energy":
+				toReturn = 1;
+			break;
+			case "Metal":
+				toReturn = 2;
+			break;
+			case "Food":
+				toReturn = 3;
+			break;
+			case "Stone":
+				toReturn = 4;
+			break;
+			case "Population":
+				toReturn = 5;
+			break;
+		}
+		
+		return toReturn;
 	}
 	
 	

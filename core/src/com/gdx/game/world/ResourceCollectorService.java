@@ -20,7 +20,7 @@ public class ResourceCollectorService {
 		if(newMonth <= currMonth) return;
 		
 		for(Planet p : world.getPlanets()) {
-			if(p.getOwner() == null) continue;
+			if(p.getOwner().isPlaceHolder()) continue;
 			
 			Empire currEmpire = p.getOwner();
 			ResourceManager currManager = currEmpire.getResourceManager();
@@ -43,6 +43,7 @@ public class ResourceCollectorService {
 		SurfaceBuilding building = cell.getSurfaceBuilding();
 		switch(building.getBuildingType()) {
 			case HOUSING:
+				manager.changeResourceValue("Population", building.getResourcePerTurn());
 				break;
 			case ALLOYMINE:
 				manager.changeResourceValue("Metal", building.getResourcePerTurn());
@@ -57,6 +58,7 @@ public class ResourceCollectorService {
 				manager.changeResourceValue("Energy", building.getResourcePerTurn());
 				break;
 			case STONEEXTRACTOR:
+				manager.changeResourceValue("Stone", building.getResourcePerTurn());
 				break;
 		}
 	}

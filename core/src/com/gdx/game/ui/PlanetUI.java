@@ -52,10 +52,13 @@ public class PlanetUI extends Stage {
 
 		Label nameLabel = new Label("Planet name: " + planet.getName(), skin);
 		String owner = "";
-		if (planet.getOwner() == null)
+		if (planet.getOwner().isPlaceHolder()) {
 			owner = "NO_OWNER_FOUND";
-		else
+		}
+			
+		else {
 			owner = planet.getOwner().getName();
+		}
 		Label ownerLabel = new Label("Owned by: " + owner, skin);
 		TextButton manageOption = new TextButton("Manage Planet", skin);
 		TextButton exit = new TextButton("Exit", skin);
@@ -79,7 +82,7 @@ public class PlanetUI extends Stage {
 		manageOption.addListener(new ChangeListener() {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
-				if(planet.getOwner() == null) {
+				if(planet.getOwner().isPlaceHolder()) {
 					return;
 				}
 				

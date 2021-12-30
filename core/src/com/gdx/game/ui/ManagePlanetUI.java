@@ -66,7 +66,7 @@ public class ManagePlanetUI extends Stage {
 		this.planetUI = planetUI;
 		planet = p;
 		owner = planet.getOwner();
-		if(owner != null) {
+		if(!owner.isPlaceHolder()) {
 			resourceManager = owner.getResourceManager();
 		}
 		screenWidth = Gdx.graphics.getWidth();

@@ -9,12 +9,14 @@ public class Empire {
 	private ArrayList<Planet> ownedPlanets;
 	private int totalPopulation;
 	private boolean mainPlayer;
+	private boolean placeHolder;
 	private Planet startingPlanet;
 	private ResourceManager resourceManager;
 
-	public Empire(String name, boolean mainPlayer) {
+	public Empire(String name, boolean mainPlayer, boolean placeHolder) {
 		this.name = name;
 		this.mainPlayer = mainPlayer;
+		this.placeHolder = placeHolder;
 		ownedShips = new ArrayList<Ship>();
 		ownedPlanets = new ArrayList<Planet>();
 		resourceManager = new ResourceManager(this);
@@ -65,6 +67,14 @@ public class Empire {
 		return mainPlayer;
 	}
 	
+	public boolean isPlaceHolder() {
+		return placeHolder;
+	}
+
+	public void setPlaceHolder(boolean placeHolder) {
+		this.placeHolder = placeHolder;
+	}
+
 	public Planet getStartingPlanet() {
 		return startingPlanet;
 	}

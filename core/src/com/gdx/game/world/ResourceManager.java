@@ -21,6 +21,7 @@ public class ResourceManager {
 		resourceValues.put("Energy", startingValue);
 		resourceValues.put("Metal", startingValue);
 		resourceValues.put("Food", startingValue);
+		resourceValues.put("Stone", startingValue);
 		resourceValues.put("Population", startingValue);
 	}
 	

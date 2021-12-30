@@ -29,6 +29,8 @@ public class World {
 	
 	private Random rand;
 	
+	private Empire placeHolderEmpire;
+	
 	public World(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -38,6 +40,7 @@ public class World {
 		ships = new ArrayList<Ship>();
 		empires = new ArrayList<Empire>();
 		planetNames = DiskLoader.loadLinesFromFile("planet_names.data");
+		placeHolderEmpire = new Empire("NO_OWNER_FOUND", false, true);
 	}
 	
 	public void createUniverse(int numSystems) {
@@ -57,7 +60,9 @@ public class World {
 			//Sprite planetSprite = new Sprite(WorldTextures.SUN_TEX);
 			//planetSprite.setBounds(pos.x, pos.y, Planet.DEFAULT_SIZE, Planet.DEFAULT_SIZE);
 			//planets.add(new Planet(planetSprite, systemName, 1));
-			planets.add(new Planet(pos.x, pos.y, systemName, Planet.TYPE_SUN));
+			Planet toAdd = new Planet(pos.x, pos.y, systemName, Planet.TYPE_SUN);
+			toAdd.setOwner(placeHolderEmpire);
+			planets.add(toAdd);
 		}
 		
 		ArrayList<Vector2> planetPos = universeGenerator.getPlanetPositions();
@@ -67,7 +72,9 @@ public class World {
 			//Sprite planetSprite = new Sprite(WorldTextures.DULL_PLANET_TEX);
 			//planetSprite.setBounds(pos.x, pos.y, Planet.DEFAULT_SIZE, Planet.DEFAULT_SIZE);
 			//planets.add(new Planet(planetSprite, planetName, 1));
-			planets.add(new Planet(pos.x, pos.y, planetName, Planet.TYPE_PLANET));
+			Planet toAdd = new Planet(pos.x, pos.y, planetName, Planet.TYPE_PLANET);
+			toAdd.setOwner(placeHolderEmpire);
+			planets.add(toAdd);
 		}
 		
 	}
@@ -106,9 +113,9 @@ public class World {
 	}
 	
 	public void createEmpire(String name, boolean isMainPlayer) {
-		Empire newEmpire = new Empire(name, isMainPlayer);
+		Empire newEmpire = new Empire(name, isMainPlayer, false);
 		empires.add(newEmpire);
-		if(isMainPlayer) { 
+		if(isMainPlayer) {
 			playerEmpire = newEmpire;
 			spawnEmpireOnStartingPlanet(playerEmpire);
 			createStartingPlanetSymbol();
