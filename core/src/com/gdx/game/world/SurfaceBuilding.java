@@ -45,6 +45,47 @@ public class SurfaceBuilding {
 		this.resourcePerTurn = resourcePerTurn;
 	}
 	
+	public BuildingCost getBuildingCost(BuildingType type) {
+		BuildingCost returnCost = null;
+		
+		switch(type) {
+			case HOUSING:
+				returnCost = new BuildingCost();
+				returnCost.addResourceCost("Food", 10);
+				returnCost.addResourceCost("Stone", 10);
+				break;
+			case ALLOYMINE:
+				returnCost = new BuildingCost();
+				returnCost.addResourceCost("Currency", 10);
+				returnCost.addResourceCost("Stone", 10);
+				returnCost.addResourceCost("Energy", 10);
+				break;
+			case CURRENCYMINE:
+				returnCost = new BuildingCost();
+				returnCost.addResourceCost("Metal", 10);
+				returnCost.addResourceCost("Energy", 10);
+				break;
+			case FARM:
+				returnCost = new BuildingCost();
+				returnCost.addResourceCost("Energy", 10);
+				returnCost.addResourceCost("Stone", 10);
+				break;
+			case TURBINE:
+				returnCost = new BuildingCost();
+				returnCost.addResourceCost("Metal", 10);
+				returnCost.addResourceCost("Energy", 10);
+				break;
+			case STONEEXTRACTOR:
+				returnCost = new BuildingCost();
+				returnCost.addResourceCost("Currency", 10);
+				returnCost.addResourceCost("Metal", 10);
+				returnCost.addResourceCost("Energy", 10);
+				break;
+		}
+		
+		return returnCost;
+	}
+	
 	
 
 }

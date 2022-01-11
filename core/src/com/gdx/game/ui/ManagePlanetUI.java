@@ -57,6 +57,9 @@ public class ManagePlanetUI extends Stage {
 	
 	private Skin skin;
 	
+	private PurchaseBuildingUI purchaseBuildingUI;	
+	
+	private boolean purchaseSelected;
 	
 	public ManagePlanetUI(Planet p, MainGameScreen game, PlanetUI planetUI) { 
 		super(new ScreenViewport());
@@ -71,6 +74,7 @@ public class ManagePlanetUI extends Stage {
 		}
 		screenWidth = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
+		purchaseSelected = false;
 		setupScreen();
 		// Gdx.input.setInputProcessor(this);
 	}
@@ -125,7 +129,7 @@ public class ManagePlanetUI extends Stage {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				if(selected.getSurfaceBuilding() == null) {
-					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.HOUSING));
+					initPurchaseBuildingUI(new SurfaceBuilding(BuildingType.HOUSING));
 				}
 			}
 		});
@@ -134,7 +138,7 @@ public class ManagePlanetUI extends Stage {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				if(selected.getSurfaceBuilding() == null) {
-					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.ALLOYMINE));
+					initPurchaseBuildingUI(new SurfaceBuilding(BuildingType.ALLOYMINE));
 				}
 			}
 		});
@@ -143,7 +147,7 @@ public class ManagePlanetUI extends Stage {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				if(selected.getSurfaceBuilding() == null) {
-					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.CURRENCYMINE));
+					initPurchaseBuildingUI(new SurfaceBuilding(BuildingType.CURRENCYMINE));
 				}
 			}
 		});
@@ -152,7 +156,7 @@ public class ManagePlanetUI extends Stage {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				if(selected.getSurfaceBuilding() == null) {
-					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.FARM));
+					initPurchaseBuildingUI(new SurfaceBuilding(BuildingType.FARM));
 				}
 			}
 		});
@@ -161,7 +165,7 @@ public class ManagePlanetUI extends Stage {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				if(selected.getSurfaceBuilding() == null) {
-					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.TURBINE));
+					initPurchaseBuildingUI(new SurfaceBuilding(BuildingType.TURBINE));
 				}
 			}
 		});
@@ -170,7 +174,7 @@ public class ManagePlanetUI extends Stage {
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				if(selected.getSurfaceBuilding() == null) {
-					selected.setSurfaceBuilding(new SurfaceBuilding(BuildingType.STONEEXTRACTOR));
+					initPurchaseBuildingUI(new SurfaceBuilding(BuildingType.STONEEXTRACTOR));
 				}
 			}
 		});
@@ -243,6 +247,15 @@ public class ManagePlanetUI extends Stage {
 		this.addActor(group);
 
 	}
+	
+	@Override
+	public void act() {
+		super.act();
+		
+		if(purchaseSelected) {
+			purchaseBuildingUI.act();
+		}
+	}
 
 	@Override
 	public void draw() {
@@ -256,6 +269,10 @@ public class ManagePlanetUI extends Stage {
 
 		drawSelectedOutline();
 		//drawSurfaceDebug();
+		
+		if(purchaseSelected) {
+			purchaseBuildingUI.draw();
+		}
 	}
 
 	private void drawBackgroundUI(Batch batch) {
@@ -385,6 +402,24 @@ public class ManagePlanetUI extends Stage {
 			}
 		}
 		return true;
+	}
+	
+	private void initPurchaseBuildingUI(SurfaceBuilding newBuilding) {
+		purchaseBuildingUI = new PurchaseBuildingUI(game, ManagePlanetUI.this, newBuilding);
+		purchaseSelected = true;
+		Gdx.input.setInputProcessor(purchaseBuildingUI);
+	}
+	
+	public void setSurfaceBuilding(SurfaceBuilding newBuilding) {
+		selected.setSurfaceBuilding(newBuilding);
+	}
+	
+	public void setPurchaseSelected(boolean purchaseSelected) {
+		this.purchaseSelected = purchaseSelected;
+	}
+	
+	public ResourceManager getResourceManager() {
+		return resourceManager;
 	}
 
 }
