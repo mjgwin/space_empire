@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.Interpolation.Swing;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.gdx.game.ui.InGameTimeUI;
@@ -34,6 +35,7 @@ import com.gdx.game.world.Star;
 import com.gdx.game.world.SurfaceTextures;
 import com.gdx.game.world.World;
 import com.gdx.game.world.WorldTextures;
+import com.gdx.game.world.Ship.ShipType;
 
 public class MainGameScreen implements Screen, InputProcessor {
 
@@ -100,8 +102,7 @@ public class MainGameScreen implements Screen, InputProcessor {
 			world.createEmpire("MainEmpire", true);
 			//world.spawnEmpireOnStartingPlanet(world.getPlayerEmpire());
 			Sprite startingSprite = world.getPlayerEmpire().getStartingPlanet().getSprite();
-			world.spawnShip((int) startingSprite.getX(), (int) startingSprite.getY(), WorldTextures.SHIP_TEX, "Ship1",
-					1, world.getPlayerEmpire());
+			world.spawnShip(new Vector2(startingSprite.getX(), startingSprite.getY()), ShipType.FIGHTER, world.getPlayerEmpire());
 			GameLogger.log("world created");
 		} catch (Exception e) {
 			GameLogger.errorLog("failed to setup world");

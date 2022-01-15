@@ -10,11 +10,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.game.utils.DiskLoader;
+import com.gdx.game.world.Ship.ShipType;
 
 public class World {
 	
 	private int width, height;
-	private int shipSize = 50;
 
 	private ArrayList<Star> stars;
 	private ArrayList<Planet> planets;
@@ -104,10 +104,9 @@ public class World {
 				startingSprite.getY() + (startingSprite.getHeight() / 2.5f), startingSymbolSize, startingSymbolSize);
 	}
 	
-	public void spawnShip(int x, int y, Texture shipTex, String name, int type, Empire owner) {
-		Sprite shipSprite = new Sprite(shipTex);
-		shipSprite.setBounds(x, y, shipSize, shipSize);
-		Ship newShip = new Ship(shipSprite, name, type, owner);
+	public void spawnShip(Vector2 spawnPos, ShipType type, Empire owner) {
+		String name = type.name() + "_" + owner.getOwnedShips().size();
+		Ship newShip = new Ship(spawnPos, type, owner, name);
 		ships.add(newShip);
 		owner.addShip(newShip);
 	}

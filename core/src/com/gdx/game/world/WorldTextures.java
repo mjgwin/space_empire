@@ -11,7 +11,7 @@ public class WorldTextures {
 	public static Texture PURPLE_PLANET_TEX;
 	public static Texture SUN_TEX;
 	public static Texture BLUE_SUN_TEX;
-	public static Texture SHIP_TEX;
+	public static Texture SHIP_TEX_FIGHTER;
 	public static Texture STARTING_SYMBOL_TEX;
 	
 	private static String textureDir = "textures/space/";
@@ -23,7 +23,7 @@ public class WorldTextures {
 		PURPLE_PLANET_TEX = new Texture(Gdx.files.internal(textureDir + "purple_planet.png"));
 		SUN_TEX = new Texture(Gdx.files.internal(textureDir + "sun.png"));
 		BLUE_SUN_TEX = new Texture(Gdx.files.internal(textureDir + "blue_sun.png"));
-		SHIP_TEX = new Texture(Gdx.files.internal(textureDir + "ship.png"));
+		SHIP_TEX_FIGHTER = new Texture(Gdx.files.internal(textureDir + "ship.png"));
 		STARTING_SYMBOL_TEX = new Texture(Gdx.files.internal(textureDir + "gold_star.png"));
 	}
 	
@@ -33,7 +33,7 @@ public class WorldTextures {
 		BLUE_PLANET_TEX.dispose();
 		PURPLE_PLANET_TEX.dispose();
 		SUN_TEX.dispose();
-		SHIP_TEX.dispose();
+		SHIP_TEX_FIGHTER.dispose();
 		STARTING_SYMBOL_TEX.dispose();
 	}
 	

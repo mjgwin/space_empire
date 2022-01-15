@@ -6,24 +6,47 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Ship {
 	
+	public enum ShipType {
+		FIGHTER,
+		COLONY,
+		CONSTRUCTION
+	}
+	
+	public static final float DEFAULT_SIZE = 50;
+	
 	private Sprite sprite;
 	private String name;
 	private Empire owner;
-	private int type;
+	private ShipType type;
 	private boolean selected;
-	private float speed = 0.5f;
+	private float speed = 2f;
 	private int targetMovementBuffer = 10;
 	private boolean moving;
 	private Vector2 currMove;
+	private Vector2 spawnPos;
 	
-	public Ship(Sprite sprite, String name, int type, Empire owner) {
-		this.sprite = sprite;
-		this.name = name;
+	public Ship(Vector2 spawnPos, ShipType type, Empire owner, String name) {
 		this.type = type;
 		this.owner = owner;
+		this.spawnPos = spawnPos;
+		this.name = name;
+		init();
 		currMove = null;
 		selected = false;
 		moving = false;
+	}
+	
+	private void init() {
+		switch(type) {
+		case FIGHTER:
+			this.sprite = new Sprite(WorldTextures.SHIP_TEX_FIGHTER);
+			this.sprite.setBounds(spawnPos.x, spawnPos.y, DEFAULT_SIZE, DEFAULT_SIZE);
+			break;
+		case COLONY:
+			break;
+		case CONSTRUCTION:
+			break;
+		}
 	}
 	
 	public void move(int x, int y) {
@@ -53,8 +76,8 @@ public class Ship {
 		
 		float radAngle = (float)Math.atan2(targetY - currY, targetX - currX);
 		
-		float newX = (float) Math.cos(radAngle);
-		float newY = (float) Math.sin(radAngle);
+		float newX = (float) Math.cos(radAngle) * speed;
+		float newY = (float) Math.sin(radAngle) * speed;
 		
 		sprite.translateX(newX);
 		sprite.translateY(newY);
@@ -99,11 +122,11 @@ public class Ship {
 		this.name = name;
 	}
 
-	public int getType() {
+	public ShipType getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(ShipType type) {
 		this.type = type;
 	}
 
