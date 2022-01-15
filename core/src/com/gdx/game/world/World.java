@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.gdx.game.utils.DiskLoader;
 import com.gdx.game.world.Ship.ShipType;
+import com.gdx.game.world.Star.StarType;
 
 public class World {
 	
@@ -50,17 +51,14 @@ public class World {
 		ArrayList<Vector2> starPos = universeGenerator.getStarPositions();
 		
 		for(Vector2 pos : starPos) {
-			stars.add(new Star((int)pos.x, (int)pos.y, 1));
+			stars.add(new Star(pos, StarType.WHITE_STAR));
 		}
 		
 		ArrayList<Vector2> systemPos = universeGenerator.getSystemCenters();
 		
 		for(Vector2 pos : systemPos) {
 			String systemName = generatePlanetName();
-			//Sprite planetSprite = new Sprite(WorldTextures.SUN_TEX);
-			//planetSprite.setBounds(pos.x, pos.y, Planet.DEFAULT_SIZE, Planet.DEFAULT_SIZE);
-			//planets.add(new Planet(planetSprite, systemName, 1));
-			Planet toAdd = new Planet(pos.x, pos.y, systemName, Planet.TYPE_SUN);
+			Planet toAdd = new Planet(pos, systemName, Planet.TYPE_SUN);
 			toAdd.setOwner(placeHolderEmpire);
 			planets.add(toAdd);
 		}
@@ -69,10 +67,7 @@ public class World {
 		
 		for(Vector2 pos : planetPos) {
 			String planetName = generatePlanetName();
-			//Sprite planetSprite = new Sprite(WorldTextures.DULL_PLANET_TEX);
-			//planetSprite.setBounds(pos.x, pos.y, Planet.DEFAULT_SIZE, Planet.DEFAULT_SIZE);
-			//planets.add(new Planet(planetSprite, planetName, 1));
-			Planet toAdd = new Planet(pos.x, pos.y, planetName, Planet.TYPE_PLANET);
+			Planet toAdd = new Planet(pos, planetName, Planet.TYPE_PLANET);
 			toAdd.setOwner(placeHolderEmpire);
 			planets.add(toAdd);
 		}

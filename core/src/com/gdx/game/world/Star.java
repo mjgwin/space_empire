@@ -1,47 +1,55 @@
 package com.gdx.game.world;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Star {
+	
+	public enum StarType {
+		WHITE_STAR
+	}
 	
 	public static int DEFAULT_SIZE = 20;
 	
-	private int x, y, type;
+	private StarType type;
+	private Vector2 pos;
 	
 	
-	public Star(int x, int y, int type) {
-		this.x = x;
-		this.y = y;
+	public Star(Vector2 spawnPos, StarType type) {
+		this.pos = spawnPos;
 		this.type = type;
 	}
 
 
-	public int getX() {
-		return x;
+	public float getX() {
+		return pos.x;
 	}
 
 
-	public void setX(int x) {
-		this.x = x;
+	public void setX(float x) {
+		pos.x = x;
 	}
 
 
-	public int getY() {
-		return y;
+	public float getY() {
+		return pos.y;
 	}
 
 
-	public void setY(int y) {
-		this.y = y;
+	public void setY(float y) {
+		pos.y = y;
 	}
 
 
-	public int getType() {
+	public StarType getType() {
 		return type;
 	}
 
 
-	public void setType(int type) {
+	public void setType(StarType type) {
 		this.type = type;
 	}
+
+	
 	
 	
 

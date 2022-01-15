@@ -5,6 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 public class Planet {
 	
@@ -40,7 +41,7 @@ public class Planet {
 		selected = false;
 	}
 	
-	public Planet(float x, float y, String name, int type) {
+	public Planet(Vector2 spawnPos, String name, int type) {
 		this.name = name;
 		this.type = type;
 		rand = new Random();
@@ -61,7 +62,7 @@ public class Planet {
 		}
 		
 		this.sprite = new Sprite(tex);
-		this.sprite.setBounds(x, y, size, size);
+		this.sprite.setBounds(spawnPos.x, spawnPos.y, size, size);
 		selected = false;
 		generateSurface();
 		
