@@ -1,9 +1,6 @@
 package com.gdx.game.world;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -46,16 +43,27 @@ public class Ship {
 		
 	}
 	
+	
 	private void moveToVector(Vector2 vec) {
-		int currX = (int) (sprite.getX() + sprite.getWidth() / 2);
-		int currY = (int) (sprite.getY() + sprite.getHeight() / 2);
-		int targetX = (int)vec.x;
-		int targetY = (int)vec.y;
-		if(currX < targetX) sprite.translateX(speed);
-		else sprite.translateX(-speed);
 		
-		if(currY < targetY) sprite.translateY(speed);
-		else sprite.translateY(-speed);
+		float currX = sprite.getX() + sprite.getWidth() / 2f;
+		float currY = sprite.getY() + sprite.getHeight() / 2f;
+		float targetX = vec.x;
+		float targetY = vec.y;
+		
+		float radAngle = (float)Math.atan2(targetY - currY, targetX - currX);
+		
+		float newX = (float) Math.cos(radAngle);
+		float newY = (float) Math.sin(radAngle);
+		
+		sprite.translateX(newX);
+		sprite.translateY(newY);
+		
+		sprite.setOrigin(sprite.getWidth() / 2f, sprite.getHeight() / 2f);
+		
+		float angle = new Vector2(targetY - currY, currX - targetX).angleDeg();
+		
+		sprite.setRotation(angle);
 		
 	}
 	
