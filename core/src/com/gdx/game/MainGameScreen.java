@@ -149,6 +149,7 @@ public class MainGameScreen implements Screen, InputProcessor {
 	public void render(float delta) {
 		
 		ScreenUtils.clear(0, 0, 0, 1);
+		
 		updateAll();
 
 		batch.setProjectionMatrix(camera.combined);
